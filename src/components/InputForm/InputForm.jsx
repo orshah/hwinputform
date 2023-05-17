@@ -1,5 +1,4 @@
 import "./inputForm.style.css";
-// import * as React from "react";
 import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
