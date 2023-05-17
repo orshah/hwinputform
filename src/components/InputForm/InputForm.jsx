@@ -84,7 +84,7 @@ export default function InputForm() {
               fullWidth
               name="address"
               label="Address"
-              type="address"
+              type="text"
               id="address"
               variant="standard"
               autoComplete="address"
