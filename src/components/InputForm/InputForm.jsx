@@ -13,8 +13,13 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined";
+import blue from "@mui/material/colors/blue";
 
-const theme = createTheme();
+const theme = createTheme({
+  palette: {
+    primary: blue,
+  },
+});
 
 const defaultFormData = {
   name: "",
@@ -43,98 +48,100 @@ export default function InputForm() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <LocalShippingOutlinedIcon fontSize="large" />
-
-          <Typography component="h1" variant="h4">
-            Delivery Form
-          </Typography>
+    <div className="cntnr">
+      <ThemeProvider theme={theme}>
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
           <Box
-            component="form"
-            onSubmit={onSubmitHandler}
-            noValidate
-            sx={{ mt: 1 }}
+            sx={{
+              marginTop: 8,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
           >
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="name"
-              label="Name"
-              name="name"
-              variant="standard"
-              autoComplete="name"
-              autoFocus
-              onChange={onChangeHandler}
-              value={deliveryData.name}
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="address"
-              label="Address"
-              type="text"
-              id="address"
-              variant="standard"
-              autoComplete="address"
-              onChange={onChangeHandler}
-              value={deliveryData.address}
-            />
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DatePicker
-                name="date"
-                sx={{ mt: 2 }}
-                value={deliveryData.date}
-                slotProps={{ textField: { variant: "standard" } }}
-              />
-            </LocalizationProvider>
-            <br></br>
-            <FormControlLabel
-              sx={{ mt: 2 }}
-              control={
-                <Checkbox
-                  value="remember"
-                  color="success"
-                  onClick={onCheckedHandler}
-                />
-              }
-              label="Signature"
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="phoneNumber"
-              label="Phone Number"
-              type="number"
-              id="number"
-              variant="standard"
-              autoComplete="phone-number"
-              onChange={onChangeHandler}
-              value={deliveryData.phoneNumber}
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+            <LocalShippingOutlinedIcon fontSize="large" />
+
+            <Typography component="h1" variant="h4">
+              Delivery Form
+            </Typography>
+            <Box
+              component="form"
+              onSubmit={onSubmitHandler}
+              noValidate
+              sx={{ mt: 1 }}
             >
-              Send
-            </Button>
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="name"
+                label="Name"
+                name="name"
+                variant="standard"
+                autoComplete="name"
+                autoFocus
+                onChange={onChangeHandler}
+                value={deliveryData.name}
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="address"
+                label="Address"
+                type="text"
+                id="address"
+                variant="standard"
+                autoComplete="address"
+                onChange={onChangeHandler}
+                value={deliveryData.address}
+              />
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DatePicker
+                  name="date"
+                  sx={{ mt: 2 }}
+                  value={deliveryData.date}
+                  slotProps={{ textField: { variant: "standard" } }}
+                />
+              </LocalizationProvider>
+              <br></br>
+              <FormControlLabel
+                sx={{ mt: 2 }}
+                control={
+                  <Checkbox
+                    value="remember"
+                    color="success"
+                    onClick={onCheckedHandler}
+                  />
+                }
+                label="Signature"
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="phoneNumber"
+                label="Phone Number"
+                type="number"
+                id="number"
+                variant="standard"
+                autoComplete="phone-number"
+                onChange={onChangeHandler}
+                value={deliveryData.phoneNumber}
+              />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Send
+              </Button>
+            </Box>
           </Box>
-        </Box>
-      </Container>
-    </ThemeProvider>
+        </Container>
+      </ThemeProvider>
+    </div>
   );
 }
