@@ -1,6 +1,7 @@
 import "./inputForm.style.css";
-import * as React from "react";
-import Avatar from "@mui/material/Avatar";
+// import * as React from "react";
+import React, { useState } from "react";
+import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -16,14 +17,30 @@ import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined
 
 const theme = createTheme();
 
+const defaultFormData = {
+  name: "",
+  address: "",
+  date: "",
+  signatureRequired: false,
+  phoneNumber: "",
+};
+
 export default function InputForm() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
+  const [deliveryData, setDeliveryData] = useState(defaultFormData);
+
+  const onChangeHandler = (e) => {
+    setDeliveryData({ ...deliveryData, [e.target.name]: e.target.value });
+  };
+
+  const onCheckedHandler = (e) => {
+    setDeliveryData({
+      ...deliveryData,
+      signatureRequired: e.target.checked,
     });
+  };
+
+  const onSubmitHandler = (event) => {
+    event.preventDefault();
   };
 
   return (
@@ -40,12 +57,12 @@ export default function InputForm() {
         >
           <LocalShippingOutlinedIcon fontSize="large" />
 
-          <Typography component="h1" variant="h5">
+          <Typography component="h1" variant="h4">
             Delivery Form
           </Typography>
           <Box
             component="form"
-            onSubmit={handleSubmit}
+            onSubmit={onSubmitHandler}
             noValidate
             sx={{ mt: 1 }}
           >
@@ -56,38 +73,66 @@ export default function InputForm() {
               id="name"
               label="Name"
               name="name"
+              variant="standard"
               autoComplete="name"
               autoFocus
+              onChange={onChangeHandler}
+              value={deliveryData.name}
             />
             <TextField
               margin="normal"
               required
               fullWidth
-              name="Address"
+              name="address"
               label="Address"
               type="address"
               id="address"
+              variant="standard"
               autoComplete="address"
+              onChange={onChangeHandler}
+              value={deliveryData.address}
             />
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DatePicker sx={{ mt: 2 }} />
+              <DatePicker
+                name="date"
+                sx={{ mt: 2 }}
+                value={deliveryData.date}
+                slotProps={{ textField: { variant: "standard" } }}
+              />
             </LocalizationProvider>
             <br></br>
             <FormControlLabel
               sx={{ mt: 2 }}
-              control={<Checkbox value="remember" color="success" />}
+              control={
+                <Checkbox
+                  value="remember"
+                  color="success"
+                  onClick={onCheckedHandler}
+                />
+              }
               label="Signature"
             />
             <TextField
               margin="normal"
               required
               fullWidth
-              name="Phone"
+              name="phoneNumber"
               label="Phone Number"
               type="number"
               id="number"
+              variant="standard"
               autoComplete="phone-number"
+              onChange={onChangeHandler}
+              value={deliveryData.phoneNumber}
             />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Send
+            </Button>
           </Box>
         </Box>
       </Container>
