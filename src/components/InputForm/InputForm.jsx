@@ -44,6 +44,7 @@ export default function InputForm() {
   };
 
   const onSubmitHandler = (event) => {
+    console.log(deliveryData);
     event.preventDefault();
   };
 
