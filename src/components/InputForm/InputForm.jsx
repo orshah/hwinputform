@@ -98,7 +98,10 @@ export default function InputForm() {
                 onChange={onChangeHandler}
                 value={deliveryData.address}
               />
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <LocalizationProvider
+                dateAdapter={AdapterDayjs}
+                onChange={onCheckedHandler}
+              >
                 <DatePicker
                   name="date"
                   sx={{ mt: 2 }}
@@ -146,3 +149,9 @@ export default function InputForm() {
     </div>
   );
 }
+
+//delivery date
+//add zip and state
+//Dont leave it wihout sinature
+//change send to Order
+//add confirmation page
